@@ -9,24 +9,24 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('http://localhost:3000'),
-  title: 'Flutter Developer Portfolio | Computer Engineering Graduate',
-  description: 'Professional portfolio of a Computer Engineering graduate specializing in Flutter development. Showcasing mobile app projects, technical skills, and professional experience.',
-  keywords: 'Flutter developer, Computer Engineering, Mobile app development, Cross-platform, Dart, Firebase, Portfolio',
-  authors: [{ name: 'Flutter Developer' }],
+  metadataBase: new URL('https://fauzan-aldi.vercel.app'),
+  title: 'FauzanAldi | Portfolio',
+  description: 'Personal portfolio of FauzanAldi, showcasing cybersecurity research, software engineering, and technical projects.',
+  keywords: 'FauzanAldi, cybersecurity, software engineering, portfolio, bug bounty, AI, backend development',
+  authors: [{ name: 'FauzanAldi' }],
   viewport: 'width=device-width, initial-scale=1',
   robots: 'index, follow',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    title: 'Flutter Developer Portfolio',
-    description: 'Professional portfolio showcasing Flutter development expertise and mobile app projects',
-    siteName: 'Flutter Developer Portfolio',
+    title: 'FauzanAldi | Portfolio',
+    description: 'Portfolio of FauzanAldi showcasing cybersecurity, development, and technical project work.',
+    siteName: 'FauzanAldi Portfolio',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Flutter Developer Portfolio',
-    description: 'Professional portfolio showcasing Flutter development expertise and mobile app projects',
+    title: 'FauzanAldi | Portfolio',
+    description: 'Portfolio of FauzanAldi showcasing cybersecurity, development, and technical project work.',
   }
 };
 
