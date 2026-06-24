@@ -601,49 +601,15 @@ export default function Portfolio() {
   return (
     <div className="bg-black text-white min-h-screen">
      {/* Navigation */}
-<nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-gray-800">
+<nav className="fixed top-0 w-full z-50 bg-transparent">
   <div className="max-w-7xl mx-auto px-6 py-4">
-    <div className="flex justify-between items-center">
-<div className="flex items-center space-x-3">
-  
-
-  
-  {/* Icons */}
-  <div className="flex space-x-2">
-    <a
-      href="https://github.com/Fauzan-Aldi"
-      className="p-1.5 bg-gray-800/50 rounded-full hover:bg-cyan-500/20 transition-all duration-300 hover:scale-105 shadow"
-    >
-      <Github className="w-4 h-4" />
-    </a>
-    <a
-      href="https://www.linkedin.com/in/fauzan-aldi/?profileId=ACoAAEouJEIBVUAGgqKuqi8WB1u4bYx4M-4VHFM"
-      className="p-1.5 bg-gray-800/50 rounded-full hover:bg-cyan-500/20 transition-all duration-300 hover:scale-105 shadow"
-    >
-      <Linkedin className="w-4 h-4" />
-    </a>
-    <a
-      href="mailto:fauzanalditester@gmail.com"
-      className="p-1.5 bg-gray-800/50 rounded-full hover:bg-cyan-500/20 transition-all duration-300 hover:scale-105 shadow"
-    >
-      <Mail className="w-4 h-4" />
-    </a>
-  </div>
-
-  {/* Name */}
-  <span className="text-lg md:text-xl font-semibold tracking-tight bg-gradient-to-r from-green-400 via-cyan-500 to-lime-300 bg-clip-text text-transparent">
-    Fauzan Aldi
-  </span>
-</div>
-
-      
-      {/* Left: Navigation Menu */}
+    <div className="flex justify-end items-center">
       <div className="hidden md:flex space-x-8">
         {['About', 'Education', 'Experience', 'Projects', 'Skills', 'Contact'].map((item) => (
           <button
             key={item}
             onClick={() => scrollToSection(item.toLowerCase())}
-            className={`text-sm font-medium transition-colors hover:text-cyan-400 ${
+            className={`text-sm font-medium transition-colors focus:outline-none focus:ring-0 hover:text-cyan-400 ${
               activeSection === item.toLowerCase() ? 'text-cyan-400' : 'text-gray-300'
             }`}
           >
@@ -720,25 +686,21 @@ export default function Portfolio() {
           <div className="grid md:grid-cols-2 gap-12 items-start">
   {/* Bagian Kiri: Teks */}
   <div className=" flex-col space-y-6 text-justify pl-0 sm:pl-8 md:pl-16">
-  <h3 className="text-xl font-bold text-white">Security Researcher & CTF Players</h3>
   <div className="space-y-6 text-justify">
-    <p className="text-sm text-gray-300 leading-relaxed">
-    Saya adalah seorang Security Researcher dengan fokus pada analisis keamanan aplikasi, 
-    sistem, dan jaringan. Keahlian saya mencakup penetration testing, vulnerability assessment, 
-    reverse engineering, serta malware analysis. Saya aktif mengeksplorasi berbagai celah keamanan
-    melalui pendekatan riset yang sistematis dan berbasis standar industri seperti OWASP dan NIST.
+    <p className="text-sm text-cyan-300 font-medium uppercase tracking-[0.2em]">
+      Security Researcher | Software Engineer | AI Engineer | Bug Hunter | CTF Players | Backend Developer | Informatic Student
     </p>
     <p className="text-sm text-gray-300 leading-relaxed">
-    Di samping aktivitas profesional, saya juga aktif mengikuti kompetisi 
-    Capture The Flag (CTF) baik secara individu maupun dalam tim. CTF menjadi
-    sarana utama saya untuk mengasah keterampilan praktis di berbagai bidang keamanan
-    seperti web exploitation, binary exploitation, cryptography, forensic analysis, hingga privilege escalation.
-    Pengalaman CTF ini memperkuat kemampuan saya dalam berpikir kritis, cepat dalam debugging, serta memahami serangan
-    dunia nyata secara lebih mendalam.
+    I am a highly driven professional with strong expertise in security research, backend development, and AI-driven solutions. I focus on delivering secure, scalable, and high-performance systems while continuously improving my capabilities through hands-on projects and competitive security challenges.
     </p>
     <p className="text-sm text-gray-300 leading-relaxed">
-    Saya terbiasa menggunakan berbagai tools seperti Burp Suite, Wireshark, Ghidra, IDA Pro, Metasploit, dan custom script untuk 
-    eksploitasi dan analisis kerentanan. Setiap temuan saya dokumentasikan dengan baik dalam bentuk laporan teknis dan proof-of-concept.
+    My core strengths include vulnerability research, penetration testing, exploit analysis, and automation using modern AI technologies. I actively participate in bug bounty programs and Capture The Flag (CTF) competitions to refine my problem-solving skills and stay current with evolving cybersecurity techniques.
+    </p>
+    <p className="text-sm text-gray-300 leading-relaxed">
+    I have extensive experience in backend engineering, API development, and building intelligent systems, with a strong understanding of reverse engineering, digital forensics, and security monitoring. I am committed to producing secure, efficient, and reliable solutions for real-world technical challenges.
+    </p>
+    <p className="text-sm text-gray-300 leading-relaxed">
+    Always ready to collaborate and contribute, I bring a combination of deep technical expertise, analytical thinking, and a professional work ethic to every project.
     </p>
     {/* Kontak Info */}
     <div className="flex flex-col gap-2">
@@ -867,149 +829,181 @@ export default function Portfolio() {
             <p className="text-gray-300 font-sans">My Professional Cybersecurity Journey</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {/* Left Timeline */}
-            <div className="relative pl-6 border-l-2 border-cyan-500/30 space-y-8">
-              {/* Security Researcher */}
-              <div>
-                <h3 className="text-xl font-bold text-white">Security Researcher</h3>
-                <p className="text-cyan-400 font-medium">HackerOne · Freelance</p>
-                <p className="text-sm text-gray-400">Jan 2026 - Present · 6 mos</p>
-                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
-                  <li>Identified and reported critical security vulnerabilities (VRP) in various bug bounty programs for Fortune 500 companies.</li>
-                  <li>Focused on exploiting high-severity security flaws such as remote code execution (RCE), SQL injection, and broken access control.</li>
-                  <li>Prepared in-depth technical reports that included reproduction steps, business impact analysis, and mitigation recommendations.</li>
-                </ul>
-              </div>
-
-              {/* Information Technology Developer */}
-              <div>
-                <h3 className="text-xl font-bold text-white">Information Technology Developer</h3>
-                <p className="text-cyan-400 font-medium">PT United Tractors Tbk · Internship</p>
-                <p className="text-sm text-gray-400">Jan 2026 - Present · 6 mos · Central Jakarta, Jakarta, Indonesia · Hybrid</p>
-                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
-                  <li>Developed and managed a real-time P2H (daily maintenance) application to monitor the readiness of heavy equipment units.</li>
-                  <li>Built an interactive dashboard system using React and Supabase to connect operational data between drivers and field supervisors.</li>
-                  <li>Optimizing PostgreSQL database queries to ensure latency-free data synchronization under limited network conditions.</li>
-                </ul>
-              </div>
-
-              {/* Penetration Tester */}
-              <div>
-                <h3 className="text-xl font-bold text-white">Penetration Tester</h3>
-                <p className="text-cyan-400 font-medium">Alibaba Group · Part-time</p>
-                <p className="text-sm text-gray-400">Mar 2026 - Apr 2026 · 2 mos · Area DKI Jakarta · On-site</p>
-                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
-                  <li>Conducting penetration testing (pentest) on web application and API infrastructure within the Alibaba services ecosystem.</li>
-                  <li>Analyzing system resilience against advanced persistent threats (APT) and verifying compliance with international data security standards.</li>
-                  <li>Collaborating with the security operations center (SOC) team to strengthen early intrusion detection systems.</li>
-                </ul>
-              </div>
-
-              {/* Founder */}
-              <div>
-                <h3 className="text-xl font-bold text-white">Founder</h3>
-                <p className="text-cyan-400 font-medium">luxera · Full-time</p>
-                <p className="text-sm text-gray-400">Feb 2026 - Mar 2026 · 2 mos · Indonesia · On-site</p>
-                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
-                  <li>Leading the strategic vision and technical development of the luxera platform, which focuses on digital solutions for SMEs.</li>
-                  <li>Designing a scalable modular system architecture using modern technology stacks (Laravel/React) to support various business verticals.</li>
-                  <li>Managing the product development lifecycle (SDLC), from market research in Tanjungpinang to the launch of the beta version.</li>
-                </ul>
-              </div>
-
-              {/* Cloud Security */}
-              <div>
-                <h3 className="text-xl font-bold text-white">Cloud Security</h3>
-                <p className="text-cyan-400 font-medium">Amazon · Part-time</p>
-                <p className="text-sm text-gray-400">Nov 2025 - Dec 2025 · 2 mos · South Jakarta, Jakarta, Indonesia · Remote</p>
-                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
-                  <li>Conducting regular audits of S3 buckets and network policies to prevent data leaks.</li>
-                  <li>Implement vulnerability scanning automation in the CI/CD pipeline to ensure deployed code has undergone security checks.</li>
-                  <li>Featured project: migration of network security policies that reduced unauthorized access gaps in the production environment by 60%.</li>
-                </ul>
-              </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+            <div className="relative pl-8 border-l-2 border-cyan-500/30 space-y-8">
+              {[
+                {
+                  title: 'Security Researcher',
+                  company: 'HackerOne',
+                  type: 'Freelance',
+                  date: 'Jan 2026 - Present · 6 mos',
+                  location: '',
+                  points: [
+                    'Identified and reported critical security vulnerabilities (VRP) in various bug bounty programs for Fortune 500 companies.',
+                    'Focused on high-severity security flaws such as remote code execution (RCE), SQL injection, and broken access control.',
+                    'Prepared in-depth technical reports with reproduction steps, business impact analysis, and mitigation recommendations.',
+                  ],
+                },
+                {
+                  title: 'Information Technology Developer',
+                  company: 'PT United Tractors Tbk',
+                  type: 'Internship',
+                  date: 'Jan 2026 - Present · 6 mos',
+                  location: 'Central Jakarta, Jakarta, Indonesia · Hybrid',
+                  points: [
+                    'Developed and managed a real-time P2H application to monitor equipment readiness.',
+                    'Built an interactive dashboard using React and Supabase for operational data sharing.',
+                    'Optimized PostgreSQL queries for latency-free data synchronization in limited network conditions.',
+                  ],
+                },
+                {
+                  title: 'Penetration Tester',
+                  company: 'Alibaba Group',
+                  type: 'Part-time',
+                  date: 'Mar 2026 - Apr 2026 · 2 mos',
+                  location: 'Area DKI Jakarta · On-site',
+                  points: [
+                    'Conducted penetration testing on web applications and API infrastructure within Alibaba services.',
+                    'Analyzed resilience against advanced persistent threats (APT) and compliance with security standards.',
+                    'Collaborated with SOC teams to improve early intrusion detection capabilities.',
+                  ],
+                },
+                {
+                  title: 'Founder',
+                  company: 'luxera',
+                  type: 'Full-time',
+                  date: 'Feb 2026 - Mar 2026 · 2 mos',
+                  location: 'Indonesia · On-site',
+                  points: [
+                    'Led strategic vision and technical development of a digital solutions platform for SMEs.',
+                    'Designed scalable modular architecture using Laravel and React.',
+                    'Managed the product development lifecycle from market research to beta launch.',
+                  ],
+                },
+                {
+                  title: 'Cloud Security',
+                  company: 'Amazon',
+                  type: 'Part-time',
+                  date: 'Nov 2025 - Dec 2025 · 2 mos',
+                  location: 'South Jakarta, Jakarta, Indonesia · Remote',
+                  points: [
+                    'Audited S3 buckets and network policies to prevent data leaks.',
+                    'Implemented vulnerability scanning automation in the CI/CD pipeline.',
+                    'Migrated network security policies to reduce unauthorized access gaps by 60%.',
+                  ],
+                },
+              ].map((item, index) => (
+                <div key={`${item.title}-${index}`} className="relative pl-6">
+                  <span className="absolute -left-5 top-3 h-3 w-3 rounded-full bg-cyan-400 ring-4 ring-black/60" />
+                  <div className="rounded-3xl bg-white/5 border border-white/10 p-6 shadow-xl shadow-cyan-500/10">
+                    <h3 className="text-xl font-semibold text-white">{item.title}</h3>
+                    <p className="text-cyan-400 font-medium">{item.company} · {item.type}</p>
+                    <p className="text-sm text-gray-400">{item.date}{item.location ? ` · ${item.location}` : ''}</p>
+                    <ul className="list-disc list-inside text-gray-300 text-sm space-y-2 mt-4">
+                      {item.points.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
             </div>
 
-            {/* Right Timeline */}
-            <div className="relative pl-6 border-l-2 border-cyan-500/30 space-y-8">
-              {/* Security Researcher - Microsoft */}
-              <div>
-                <h3 className="text-xl font-bold text-white">Security Researcher</h3>
-                <p className="text-cyan-400 font-medium">Microsoft · Part-time</p>
-                <p className="text-sm text-gray-400">Jan 2024 - Jan 2025 · 1 yr 1 mo · South Jakarta, Jakarta, Indonesia · Remote</p>
-                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
-                  <li>Contributed to research on cyber threats targeting cloud-based services and the Windows operating system.</li>
-                  <li>Conducted in-depth analysis of logic flaws in third-party API integrations.</li>
-                  <li>Documented research findings to assist Microsoft's internal teams in applying patches before vulnerabilities were publicly exploited.</li>
-                </ul>
-              </div>
-
-              {/* CTF GEMASIK */}
-              <div>
-                <h3 className="text-xl font-bold text-white">CTF GEMASIK</h3>
-                <p className="text-cyan-400 font-medium">Pusat Prestasi Nasional · Seasonal</p>
-                <p className="text-sm text-gray-400">Jul 2024 - Aug 2024 · 2 mos · Remote</p>
-                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
-                  <li>GEMASIK cybersecurity competition provides a competitive arena for students to showcase their skills in handling cyber security incidents through a series of CTF-based challenges.</li>
-                  <li>Participants tested in a capture the flag (CTF) format that requires a deep understanding of cybersecurity concepts and solid technical capabilities.</li>
-                </ul>
-              </div>
-
-              {/* Bug Hunter - Bugcrowd */}
-              <div>
-                <h3 className="text-xl font-bold text-white">Bug Hunter</h3>
-                <p className="text-cyan-400 font-medium">Bugcrowd · Freelance</p>
-                <p className="text-sm text-gray-400">Aug 2023 - Aug 2024 · 1 yr 1 mo</p>
-                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
-                  <li>Awarded a letter of appreciation and inducted into the NASA Hall of Fame for significant contributions to identifying and reporting critical security vulnerabilities in NASA's digital infrastructure.</li>
-                  <li>Conducted in-depth research on NASA's public assets to identify potential security gaps, helping the organization strengthen its cybersecurity defenses against external threats.</li>
-                </ul>
-              </div>
-
-              {/* Bug Bounty - YesWeHack */}
-              <div>
-                <h3 className="text-xl font-bold text-white">Bug Bounty</h3>
-                <p className="text-cyan-400 font-medium">YesWeHack · Freelance</p>
-                <p className="text-sm text-gray-400">Jul 2022 - Jul 2024 · 2 yrs 1 mo · Remote</p>
-                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
-                  <li>Collaborated in developing comprehensive penetration testing reports through systematic collection and analysis of security findings.</li>
-                  <li>Demonstrated strong aptitude in web application security, consistently expanding knowledge through hands-on experience and dedicated learning in cybersecurity domains.</li>
-                </ul>
-              </div>
-
-              {/* Penetration Tester - Intigriti */}
-              <div>
-                <h3 className="text-xl font-bold text-white">Penetration Tester</h3>
-                <p className="text-cyan-400 font-medium">Intigriti · Freelance</p>
-                <p className="text-sm text-gray-400">Jun 2022 - Jun 2024 · 2 yrs 1 mo · Remote</p>
-                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
-                  <li>Proactively identifies and mitigates potential security vulnerabilities prior to exploitation by malicious actors.</li>
-                  <li>Enables rapid vulnerability detection and remediation, minimizing financial impact from potential security incidents.</li>
-                </ul>
-              </div>
-
-              {/* VVIP BSSN */}
-              <div>
-                <h3 className="text-xl font-bold text-white">Voluntary Vulnerability Identification And Protection Program</h3>
-                <p className="text-cyan-400 font-medium">Badan Siber dan Sandi Negara · Freelance</p>
-                <p className="text-sm text-gray-400">May 2024 · 1 mo · Tanjung Pinang, Kepulauan Riau, Indonesia · Remote</p>
-                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
-                  <li>I had the opportunity to participate in an exclusive cybersecurity development program organized by the national cyber and crypto agency (BSSN).</li>
-                </ul>
-              </div>
-
-              {/* Telkom Indonesia */}
-              <div>
-                <h3 className="text-xl font-bold text-white">TELEKOMUNIKASI INDONESIA</h3>
-                <p className="text-cyan-400 font-medium">Telkom Indonesia · Apprenticeship</p>
-                <p className="text-sm text-gray-400">Jan 2022 - Jan 2024 · 2 yrs 1 mo · Tanjungpinang, Riau Islands, Indonesia · On-site</p>
-                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
-                  <li>Play an active role in supporting the technical team's daily operations by assisting with computer-based administrative tasks.</li>
-                  <li>Be responsible for installing, configuring, and maintaining the local area network (LAN) infrastructure between workstations.</li>
-                  <li>Contribute to the network troubleshooting process by diagnosing and providing technical solutions to connectivity issues.</li>
-                </ul>
-              </div>
+            <div className="relative pl-8 border-l-2 border-cyan-500/30 space-y-8">
+              {[
+                {
+                  title: 'Security Researcher',
+                  company: 'Microsoft',
+                  type: 'Part-time',
+                  date: 'Jan 2024 - Jan 2025 · 1 yr 1 mo',
+                  location: 'South Jakarta, Jakarta, Indonesia · Remote',
+                  points: [
+                    'Researched cyber threats targeting cloud services and the Windows OS.',
+                    'Analyzed logic flaws in third-party API integrations.',
+                    'Documented findings to support pre-patch vulnerability mitigation.',
+                  ],
+                },
+                {
+                  title: 'CTF GEMASIK',
+                  company: 'Pusat Prestasi Nasional',
+                  type: 'Seasonal',
+                  date: 'Jul 2024 - Aug 2024 · 2 mos',
+                  location: 'Remote',
+                  points: [
+                    'Competed in CTF challenges to demonstrate cybersecurity incident handling skills.',
+                    'Solved problems across exploitation, cryptography, and forensics.',
+                  ],
+                },
+                {
+                  title: 'Bug Hunter',
+                  company: 'Bugcrowd',
+                  type: 'Freelance',
+                  date: 'Aug 2023 - Aug 2024 · 1 yr 1 mo',
+                  location: '',
+                  points: [
+                    'Recognized with a letter of appreciation and inducted into the NASA Hall of Fame.',
+                    'Researched public assets and reported vulnerabilities to strengthen cybersecurity defenses.',
+                  ],
+                },
+                {
+                  title: 'Bug Bounty',
+                  company: 'YesWeHack',
+                  type: 'Freelance',
+                  date: 'Jul 2022 - Jul 2024 · 2 yrs 1 mo',
+                  location: 'Remote',
+                  points: [
+                    'Created comprehensive penetration testing reports through systematic security analysis.',
+                    'Expanded expertise in web application security through hands-on bug hunting.',
+                  ],
+                },
+                {
+                  title: 'Penetration Tester',
+                  company: 'Intigriti',
+                  type: 'Freelance',
+                  date: 'Jun 2022 - Jun 2024 · 2 yrs 1 mo',
+                  location: 'Remote',
+                  points: [
+                    'Identified and mitigated security vulnerabilities before exploitation.',
+                    'Enabled rapid detection and remediation of potential incidents.',
+                  ],
+                },
+                {
+                  title: 'VVIP BSSN',
+                  company: 'Badan Siber dan Sandi Negara',
+                  type: 'Freelance',
+                  date: 'May 2024 · 1 mo',
+                  location: 'Tanjung Pinang, Kepulauan Riau, Indonesia · Remote',
+                  points: [
+                    'Participated in an exclusive cybersecurity development program led by the national cyber agency (BSSN).',
+                  ],
+                },
+                {
+                  title: 'TELEKOMUNIKASI INDONESIA',
+                  company: 'Telkom Indonesia',
+                  type: 'Apprenticeship',
+                  date: 'Jan 2022 - Jan 2024 · 2 yrs 1 mo',
+                  location: 'Tanjungpinang, Riau Islands, Indonesia · On-site',
+                  points: [
+                    'Supported technical operations through computer-based administrative tasks.',
+                    'Installed, configured, and maintained LAN infrastructure.',
+                    'Diagnosed connectivity issues and provided network solutions.',
+                  ],
+                },
+              ].map((item, index) => (
+                <div key={`${item.title}-${index}`} className="relative pl-6">
+                  <span className="absolute -left-5 top-3 h-3 w-3 rounded-full bg-cyan-400 ring-4 ring-black/60" />
+                  <div className="rounded-3xl bg-white/5 border border-white/10 p-6 shadow-xl shadow-cyan-500/10">
+                    <h3 className="text-xl font-semibold text-white">{item.title}</h3>
+                    <p className="text-cyan-400 font-medium">{item.company} · {item.type}</p>
+                    <p className="text-sm text-gray-400">{item.date}{item.location ? ` · ${item.location}` : ''}</p>
+                    <ul className="list-disc list-inside text-gray-300 text-sm space-y-2 mt-4">
+                      {item.points.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -1066,8 +1060,10 @@ export default function Portfolio() {
                 color: "orange"
               }
             ].map((project, index) => (
-              <Card key={index} className="bg-gray-900/50 border-gray-800 backdrop-blur-sm hover:border-cyan-500/30 transition-all duration-300 group hover:scale-105">
-                <CardContent className="p-6">
+              <Card key={index} className="relative overflow-hidden h-full flex flex-col bg-gray-900/50 border border-white/10 backdrop-blur-sm hover:border-cyan-500/30 transition-all duration-300 group hover:scale-105">
+                <span className="pointer-events-none absolute -right-16 top-12 h-40 w-40 rounded-full bg-cyan-500/10 blur-3xl animate-pulse" />
+                <span className="pointer-events-none absolute -left-10 bottom-8 h-32 w-32 rounded-full bg-blue-500/10 blur-2xl animate-pulse" />
+                <CardContent className="relative z-10 flex h-full flex-col p-6">
                   <div className="flex items-center justify-between mb-4">
                     <FolderOpen className="w-8 h-8 text-cyan-400" />
                     <div className="flex space-x-2">
@@ -1075,18 +1071,24 @@ export default function Portfolio() {
                       <Github className="w-5 h-5 text-gray-400 hover:text-cyan-400 cursor-pointer transition-colors" />
                     </div>
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm-200 mb-4 text-sm text-justify">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech, techIndex) => (
-                      <Badge key={techIndex} variant="secondary" className="bg-gray-800 text-gray-300 text-xs">
-                        {tech}
-                      </Badge>
-                    ))}
+                  <div className="space-y-4 flex-1">
+                    <div>
+                      <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-cyan-400 transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-sm text-gray-300 leading-relaxed">
+                        {project.description}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-6">
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech.map((tech, techIndex) => (
+                        <Badge key={techIndex} variant="secondary" className="bg-gray-800 text-gray-300 text-xs">
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -1168,11 +1170,11 @@ export default function Portfolio() {
     </div>
 
     {/* Articles Grid */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
       {articles.map((article) => (
         <div
           key={article.id}
-          className="group bg-gray-800/40 rounded-xl p-6 border border-gray-700/30 hover:border-gray-600/50 transition-all duration-300 hover:-translate-y-1"
+          className="group bg-gray-800/40 rounded-xl p-6 border border-gray-700/30 hover:border-gray-600/50 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col justify-between"
         >
           {/* Header */}
           <div className="flex items-start justify-between mb-4">
