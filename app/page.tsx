@@ -603,7 +603,12 @@ export default function Portfolio() {
      {/* Navigation */}
 <nav className="fixed top-0 w-full z-50 bg-transparent">
   <div className="max-w-7xl mx-auto px-6 py-4">
-    <div className="flex justify-end items-center">
+    <div className="flex justify-between items-center">
+      <div className="hidden md:flex items-center">
+        <span className="text-lg md:text-xl font-semibold tracking-tight text-white">
+          Fauzan Aldi
+        </span>
+      </div>
       <div className="hidden md:flex space-x-8">
         {['About', 'Education', 'Experience', 'Projects', 'Skills', 'Contact'].map((item) => (
           <button
@@ -617,8 +622,7 @@ export default function Portfolio() {
           </button>
         ))}
       </div>
-               
-          </div>
+    </div>
         </div>
       </nav>
 
