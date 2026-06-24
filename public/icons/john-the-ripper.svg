@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="John the Ripper">
+  <rect width="128" height="128" rx="24" fill="#1A1A2E"/>
+  <path fill="#E94560" d="M64 24c-11 0-20 9-20 20v8h8v-8c0-6.6 5.4-12 12-12s12 5.4 12 12v4c0 8-6 12-14 16-8 4-10 7-10 12v6h8v-6c0-3 2-5 8-8 8-4 16-10 16-22v-4c0-11-9-20-20-20z"/>
+  <rect x="56" y="88" width="16" height="16" rx="2" fill="#E94560"/>
+</svg>

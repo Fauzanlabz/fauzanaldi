@@ -1,21 +1,20 @@
 'use client';
 import './globals.css'
 import { useState, useEffect } from 'react';
-import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaDatabase, FaGithub } from 'react-icons/fa';
+import CertificatePlatformIcon, { type CertPlatform } from '@/components/CertificatePlatformIcon';
 import { Github, Linkedin, Mail, Phone, MapPin, ExternalLink, ChevronDown, Code, Smartphone, Database, Cloud, Award, Heart, User, GraduationCap, Briefcase, FolderOpen, Wrench, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import img from '../img/aldi1.jpeg'; 
+// import img from '../img/aldi1.jpeg';
 import { ReactTyped } from "react-typed";
 import { motion } from "framer-motion";
 import { Server,  Layers, GitBranch, Globe, Cpu, Palette, Zap, Monitor } from 'lucide-react';
 import React from 'react';
-import { FaPython } from 'react-icons/fa';
 import Image from 'next/image';
-import SkillsSection from '@/components/SkillsSection';
+import SkillIcon from '@/components/SkillIcon';
 import { Bug } from 'lucide-react';
 import {Network,} from 'lucide-react';
 import { FlaskConical } from 'lucide-react';
@@ -107,6 +106,16 @@ export interface ContactInfo {
 export type AuthState = 'login' | 'dashboard' | 'portfolio';
 
 export type DashboardSection = 'overview' | 'about' | 'education' | 'experience' | 'projects' | 'skills' | 'certificates' | 'contact';
+
+const TYPED_ROLES = [
+  'Security Researcher',
+  'Software Engineer',
+  'AI Engineer',
+  'Bug Hunter',
+  'CTF Players',
+  'Backend Developer',
+  'Informatic Student',
+];
 
 const articles = [
   {
@@ -220,17 +229,16 @@ const interests: Interest[] = [
 
 type Skill = {
   name: string;
-  icon: JSX.Element;
+  slug: string;
   category: string;
   color: string;
 };
 interface Certificate {
   id: number;
-  title: string;
-  description: string;
-  imageUrl: string;
-  issuer: string;
-  year: string;
+  abbreviation: string;
+  fullName: string;
+  platform: CertPlatform;
+  platformLabel: string;
 }
 interface Interest {
   name: string;
@@ -309,362 +317,250 @@ const interest: Interest[] = [
 ];
 
 
-const skill: Skill[] = [
-  {
-    name: 'React',
-    category: 'Frontend',
-    icon: <FaReact />,
-    color: 'bg-blue-500',
-  },
-  {
-    name: 'Node.js',
-    category: 'Backend',
-    icon: <FaNodeJs />,
-    color: 'bg-green-600',
-  },
-  {
-    name: 'HTML5',
-    category: 'Markup',
-    icon: <FaHtml5 />,
-    color: 'bg-orange-500',
-  },
-  {
-    name: 'CSS3',
-    category: 'Style',
-    icon: <FaCss3Alt />,
-    color: 'bg-blue-600',
-  },
-  {
-    name: 'MySQL',
-    category: 'Database',
-    icon: <FaDatabase />,
-    color: 'bg-yellow-600',
-  },
-  {
-    name: 'GitHub',
-    category: 'Version Control',
-    icon: <FaGithub />,
-    color: 'bg-gray-800',
-  },
-  {
-    name: 'React',
-    category: 'Frontend',
-    color: 'bg-blue-500',
-    icon: <FaReact size={24} />,
-  },
-  {
-    name: 'No=de.js',
-    category: 'Backend',
-    color: 'bg-green-600',
-    icon: <FaNodeJs size={24} />,
-  },
-  {
-    name: 'Custom Icon',
-    category: 'Tooling',
-    color: 'bg-yellow-600',
-    icon: (
-      <Image
-        src="/icons/my-custom-icon.png"
-        alt="My Custom Icon"
-        width={24}
-        height={24}
-      />
-    ),
-  },
-
-];
 const skillsTop: Skill[] = [
   {
     name: 'Burp Suite',
-    icon: <Bug className="w-6 h-6" />,
+    slug: 'burpsuite',
     category: 'Web Penetration Testing',
-    color: '',
+    color: '#FF6633',
   },
   {
     name: 'Nmap',
-    icon: <Network className="w-6 h-6" />,
+    slug: 'nmap',
     category: 'Network Scanning',
-    color: '',
+    color: '#7AB932',
   },
   {
     name: 'Metasploit',
-    icon: <Server className="w-6 h-6" />,
+    slug: 'metasploit',
     category: 'Exploit Framework',
-    color: '',
+    color: '#2596BE',
   },
   {
     name: 'John the Ripper',
-    icon: <Database className="w-6 h-6" />,
+    slug: 'john-the-ripper',
     category: 'Password Cracking',
-    color: '',
+    color: '#E94560',
   },
   {
     name: 'Parrot OS',
-    icon: <Cloud className="w-6 h-6" />,
+    slug: 'parrot',
     category: 'Penetration Testing',
-    color: '',
+    color: '#15AD9C',
   },
   {
-    name: 'OpenVas',
-    icon: <Database className="w-6 h-6" />,
-    category: 'Vulnerability Scanner',
-    color: '',
+    name: 'Wireshark',
+    slug: 'wireshark',
+    category: 'Network Analysis',
+    color: '#1679A7',
   },
   {
     name: 'OSINT Tools',
-    icon: <Layers className="w-6 h-6" />,
+    slug: 'osint',
     category: 'Information Gathering',
-    color: '',
+    color: '#3282B8',
   },
   {
     name: 'Snort',
-    icon: <Globe className="w-6 h-6" />,
+    slug: 'snort',
     category: 'Intrusion Detection System',
-    color: '',
+    color: '#F15A24',
   },
- 
 ];
 const skillsBottom: Skill[] = [
-  { 
-    name: 'MySQL', 
-    icon: <ServerCog className="w-6 h-6" />, 
-    category: 'Relational Database', 
-    color: '' 
+  {
+    name: 'MySQL',
+    slug: 'mysql',
+    category: 'Relational Database',
+    color: '#4479A1',
   },
   {
     name: 'MongoDB',
-    icon: <DatabaseBackup className="w-6 h-6" />,
+    slug: 'mongodb',
     category: 'NoSQL Database',
-    color: ''
+    color: '#47A248',
   },
   {
     name: 'Redis',
-    icon: <HardDriveDownload className="w-6 h-6" />,
+    slug: 'redis',
     category: 'In-Memory Key-Value Store',
-    color: ''
+    color: '#FF4438',
   },
   {
     name: 'Firebase',
-    icon: <Cloud className="w-6 h-6" />,
+    slug: 'firebase',
     category: 'Realtime NoSQL Database',
-    color: ''
+    color: '#FFCA28',
   },
   {
-    
     name: 'Python',
-    icon: <Cpu className="w-6 h-6" />,
+    slug: 'python',
     category: 'Programming Language',
-    color: '',
+    color: '#3776AB',
   },
   {
     name: 'Git',
-    icon: <GitBranch className="w-6 h-6" />,
+    slug: 'git',
     category: 'Version Control',
-    color: '',
+    color: '#F05032',
   },
-
   {
     name: 'TypeScript',
-  icon: <FileCode className="w-6 h-6" />,
-  category: 'Programming Language',
-  color: '',
+    slug: 'typescript',
+    category: 'Programming Language',
+    color: '#3178C6',
   },
   {
     name: 'Tailwind CSS',
-    icon: <Palette className="w-6 h-6" />,
+    slug: 'tailwindcss',
     category: 'CSS Framework',
-    color: '',
+    color: '#06B6D4',
   },
   {
     name: 'GraphQL',
-    icon: <Zap className="w-6 h-6" />,
+    slug: 'graphql',
     category: 'API Query Language',
-    color: '',
+    color: '#E10098',
   },
   {
     name: 'Vue.js',
-    icon: <Monitor className="w-6 h-6" />,
+    slug: 'vue',
     category: 'Frontend Framework',
-    color: '',
+    color: '#4FC08D',
   },
   {
     name: 'Node.js',
-    icon: <Cpu className="w-6 h-6" />,
+    slug: 'nodejs',
     category: 'Runtime Environment',
-    color: '',
+    color: '#339933',
   },
   {
     name: 'Express.js',
-    icon: <Server className="w-6 h-6" />,
+    slug: 'express',
     category: 'Web Framework',
-    color: '',
+    color: '#FFFFFF',
   },
   {
     name: 'Laravel',
-    icon: <Server className="w-6 h-6" />,
+    slug: 'laravel',
     category: 'PHP Framework',
-    color: '',
+    color: '#FF2D20',
   },
   {
     name: 'Spring Boot',
-    icon: <Zap className="w-6 h-6" />,
+    slug: 'springboot',
     category: 'Java Backend Framework',
-    color: '',
+    color: '#6DB33F',
   },
   {
     name: 'Django',
-    icon: <Layers className="w-6 h-6" />,
+    slug: 'django',
     category: 'Python Framework',
-    color: '',
+    color: '#44B78B',
   },
   {
     name: 'Flask',
-    icon: <FlaskConical className="w-6 h-6" />,
+    slug: 'flask',
     category: 'Web Framework',
-    color: '',
+    color: '#FFFFFF',
   },
   {
     name: 'PHP',
-  icon: <Terminal className="w-6 h-6" />,
-  category: 'Backend Programming',
-  color: '',
+    slug: 'php',
+    category: 'Backend Programming',
+    color: '#777BB4',
   },
-
 ];
 const certificates: Certificate[] = [
   {
     id: 1,
-    title: "Google Cyber Security",
-    description: " Kursus program pelatihan untuk pemula, mengajarkan keterampilan keamanan siber.",
-    imageUrl: "/src/img/GoogleCyberSecurity.png",
-    issuer: "Coursera-Net",
-    year: "2024"
+    abbreviation: 'CPTS',
+    fullName: 'Certified Penetration Testing Specialist',
+    platform: 'hackthebox',
+    platformLabel: 'Hack The Box Academy',
   },
   {
     id: 2,
-    title: "Fundamental Of Cyber",
-    description: "Kursus Fundamental Cyber Security yang memperkenalkan konsep keamanan siber.",
-    imageUrl: "/src/img/Course.net.png",
-    issuer: "Coursera-Net",
-    year: "2024"
+    abbreviation: 'CWEE',
+    fullName: 'Certified Web Exploitation Expert',
+    platform: 'hackthebox',
+    platformLabel: 'Hack The Box Academy',
   },
   {
     id: 3,
-    title: "Endpoint Security",
-    description: "Kursus keamanan perangkat yang melindungi dari malware dan serangan siber berbasis cloud.",
-    imageUrl: "/src/img/Endpointsecurity.png",
-    issuer: "Cisco",
-    year: "2024"
+    abbreviation: 'CWSE / CWES',
+    fullName: 'Certified Web Exploitation Specialist',
+    platform: 'hackthebox',
+    platformLabel: 'Hack The Box Academy',
   },
   {
     id: 4,
-    title: "Jaringan Komputer",
-    description: "Kursus ini mengajarkan dasar-dasar jaringan komputer, termasuk protokol, alamat IP dll.",
-    imageUrl: "/src/img/Jaringan.png",
-    issuer: "Coursera-Net",
-    year: "2024"
+    abbreviation: 'CAPE',
+    fullName: 'Certified Active Directory Pentesting Expert',
+    platform: 'hackthebox',
+    platformLabel: 'Hack The Box Academy',
   },
   {
     id: 5,
-    title: "Sertifikat Apresiasi ITB",
-    description: "Telah bekerja sama dengan ITB dalam hal kordinasi temuan kerentanan dan bertindak etis. ",
-    imageUrl: "/src/img/3.jpg",
-    issuer: "ITB",
-    year: "2024"
+    abbreviation: 'CDSA',
+    fullName: 'Certified Defensive Security Analyst',
+    platform: 'hackthebox',
+    platformLabel: 'Hack The Box Academy',
   },
   {
     id: 6,
-    title: "Sertifikat Apresiasi KKRI",
-    description: "Atas peran dan kontribusi menemukan dan melaporkan kerentanan sistem atau aplikasi milik KKRI.",
-    imageUrl: "/src/img/12.jpg",
-    issuer: "KKRI",
-    year: "2024"
+    abbreviation: 'COAE',
+    fullName: 'Certified Offensive AI Expert',
+    platform: 'hackthebox',
+    platformLabel: 'Hack The Box Academy',
   },
   {
     id: 7,
-    title: "Sertifikat Aperesiasi Diskominfo Riau ",
-    description: "Atas partisipasinya dalam menemukan celah kerentanan pada sistem elektronik Riau.",
-    imageUrl: "/src/img/17.jpg",
-    issuer: "CSIRT",
-    year: "2024"
+    abbreviation: 'CRTA',
+    fullName: 'Certified Red Team Analyst',
+    platform: 'ine',
+    platformLabel: 'INE Security',
   },
   {
     id: 8,
-    title: "Sertifikat Apresiasi BADAN POM",
-    description: "atas peran dan kontribusi dalam menemukan dan melaporkan kerentanan pada aplikasi Badan POM.",
-    imageUrl: "/src/img/8.jpg",
-    issuer: "CSIRT",
-    year: "2024"
-  },
-  {
-    id: 11,
-    title: "BSSN VVIP PROGRAM : VULNERABILITY ( HIGH )",
-    description: "Sebagai pelapor kerentanan dengan severity (HIGH) program BSSN.",
-    imageUrl: "/src/img/BSSN3.png",
-    issuer: "BSSN VVIP",
-    year: "2024"
+    abbreviation: 'CAPT',
+    fullName: 'Certified Active Directory Pentester',
+    platform: 'ine-elearn',
+    platformLabel: 'INE Security / eLearnSecurity',
   },
   {
     id: 9,
-    title: "BSSN VVIP PROGRAM : JAWA TIMUR",
-    description: "Sebagai partisipan program identifikasi Kerentanan : Jawa Timur Program BSSN.",
-    imageUrl: "/src/img/BSSN1.png",
-    issuer: "BSSN VVIP",
-    year: "5 -14 Februari 2024"
+    abbreviation: 'CAPEN',
+    fullName: 'Certified AppSec Pentester',
+    platform: 'ine',
+    platformLabel: 'INE Security',
   },
   {
     id: 10,
-    title: "BSSN VVIP PROGRAM : D.I.YOGYAKARTA",
-    description: "Sebagai partisipan program identifikasi Kerentanan : D.I Yogyakarta Program BSSN.",
-    imageUrl: "/src/img/BSSN2.png",
-    issuer: "BSSN VVIP",
-    year: "2024"
+    abbreviation: 'C-AI/MLPEN',
+    fullName: 'Certified AI/ML Penetration Tester',
+    platform: 'ine',
+    platformLabel: 'INE Security',
   },
-  {
-    id: 11,
-    title: "BSSN VVIP PROGRAM : KULON PROGO",
-    description: "Sebagai partisipan program identifikasi Kerentanan : Kulon Progo Program BSSN.",
-    imageUrl: "/src/img/BSSN4.jpg",
-    issuer: "BSSN VVIP",
-    year: "2024"
-  },
- 
 ];
 
 function CertificateCard({ cert }: { cert: Certificate }) {
   return (
-    <Card className="group bg-gray-900/50 border-gray-800 backdrop-blur-sm hover:border-cyan-500/30 transition-all duration-300 hover:scale-105">
-      <div className=" relative overflow-hidden h-40 bg-gradient-to-br from-gray-100 to-gray-200">
-        <Image
-          src={cert.imageUrl}
-          alt={cert.title}
-          layout="fill"
-          objectFit="contain"
-          className="group-hover:scale-105 transition-transform duration-800"
-        />
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-2">
-          <div className="flex items-center justify-between text-white text-xs">
-            <span className="font-medium">{cert.issuer}</span>
-            <span>{cert.year}</span>
-          </div>
-        </div>
+    <div
+      className="group flex flex-col items-center justify-start p-2.5 h-[118px] w-full max-w-[132px] mx-auto rounded-md bg-white/5 hover:bg-white/[0.07] transition-all duration-300"
+      title={`${cert.abbreviation} (${cert.fullName}) — ${cert.platformLabel}`}
+    >
+      <div className="flex items-center justify-center h-7 mb-1.5 shrink-0 group-hover:scale-110 transition-transform duration-300">
+        <CertificatePlatformIcon platform={cert.platform} size={22} />
       </div>
-      <CardContent className="p-5">
-        <h3 className="text-lg font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors line-clamp-2">
-          {cert.title}
-        </h3>
-        <p className="text-gray-300 text-sm leading-relaxed line-clamp-3">
-          {cert.description}
-        </p>
-        <div className="mt-4 flex items-center">
-          <div className="flex-1 h-px bg-gradient-to-r from-cyan-200 to-blue-200"></div>
-          <div className="px-3 py-1 bg-gradient-to-r from-cyan-50 to-blue-50 rounded-full border border-cyan-200">
-            <span className="text-xs font-medium text-cyan-700"></span>
-          </div>
-          <div className="flex-1 h-px bg-gradient-to-r from-blue-200 to-cyan-200"></div>
-        </div>
-      </CardContent>
-    </Card>
+      <p className="text-[10px] leading-tight text-center text-white font-semibold line-clamp-3">
+        <span className="text-cyan-400">{cert.abbreviation}</span>
+        <span className="text-gray-400 font-normal"> ({cert.fullName})</span>
+      </p>
+      <p className="text-[9px] text-gray-500 text-center mt-auto pt-1 leading-tight line-clamp-2">
+        {cert.platformLabel}
+      </p>
+    </div>
   );
 }
 
@@ -760,21 +656,17 @@ export default function Portfolio() {
         </div>
       </nav>
 
-      
-
-  {/* Hero Section */}
-  function Hero() 
-  return 
-    <section
-      id="hero"
-      className="py-20 px-4 sm:px-6 "
-    >
-      <div className="container pb-8 sm:pb-0">
-        <div className="grid grid-cols-1 sm:grid-cols-2">
-          {/* Text Section */}
-          <div className="flex flex-col justify-center pt-1  mt-[-90px] sm:pt-0 text-center sm:text-left order-2 sm:order-1 gap-8">
-            {/* Text Page Hero */}
-            <div className=" dark:text-white text-2xl">
+      {/* Hero Section */}
+      <section
+        id="hero"
+        className="py-20 px-4 sm:px-6"
+      >
+        <div className="container pb-8 sm:pb-0">
+          <div className="grid grid-cols-1 sm:grid-cols-2">
+            {/* Text Section */}
+            <div className="flex flex-col justify-center pt-1  mt-[-90px] sm:pt-0 text-center sm:text-left order-2 sm:order-1 gap-8">
+              {/* Text Page Hero */}
+              <div className=" dark:text-white text-2xl">
               <p>
                 Hy, My Name Is ...🙌{" "}
                 <span className="text-4xl block font-bold my-5">
@@ -783,14 +675,7 @@ export default function Portfolio() {
                 I'm{" "}
                 <span className="text-cyan-400 text-2xl">
                   <ReactTyped
-                    strings={[
-                      "Security Researcher",
-                      "Penetration Tester",
-                      "Bug Hunter",
-                      "CTF Players",
-                      "Cyber Security Enthusiast",
-                      "Informatics Student",
-                    ]}
+                    strings={TYPED_ROLES}
                     typeSpeed={100}
                     loop
                     backSpeed={20}
@@ -985,68 +870,145 @@ export default function Portfolio() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {/* Left Timeline */}
             <div className="relative pl-6 border-l-2 border-cyan-500/30 space-y-8">
-          
-              {/* BUG HUNTER */}
-              <div className="relative mt-[-80px]">
-              <CardContent className="p-6 space-y-3">
-            </CardContent>
-            </div>
+              {/* Security Researcher */}
+              <div>
+                <h3 className="text-xl font-bold text-white">Security Researcher</h3>
+                <p className="text-cyan-400 font-medium">HackerOne · Freelance</p>
+                <p className="text-sm text-gray-400">Jan 2026 - Present · 6 mos</p>
+                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
+                  <li>Identified and reported critical security vulnerabilities (VRP) in various bug bounty programs for Fortune 500 companies.</li>
+                  <li>Focused on exploiting high-severity security flaws such as remote code execution (RCE), SQL injection, and broken access control.</li>
+                  <li>Prepared in-depth technical reports that included reproduction steps, business impact analysis, and mitigation recommendations.</li>
+                </ul>
+              </div>
 
-                <CardContent className="p-6 space-y-3 text justify">
-                  <h3 className="text-xl font-bold text-white">BUG HUNTER</h3>
-                  <p className="text-sm text-gray-400">Agustus 2023 - Agustus 2024 | Pekerja Lepas</p>
-                  <p className="text-sm text-cyan-400">BugCrowd</p>
-                  <ul className="list-disc list-inside text-gray-300 text-sm space-y-1">
-                    <li>Menemukan celah kritis dan mendapat kompensasi serta pengakuan Hall of Fame NASA.</li>
-                    <li>Diundang program bug bounty privat oleh platform ternama.</li>
-                    <li>Ahli Burp Suite, OWASP ZAP dan teknik uji manual.</li>
-                  </ul>
-                </CardContent>
-            
+              {/* Information Technology Developer */}
+              <div>
+                <h3 className="text-xl font-bold text-white">Information Technology Developer</h3>
+                <p className="text-cyan-400 font-medium">PT United Tractors Tbk · Internship</p>
+                <p className="text-sm text-gray-400">Jan 2026 - Present · 6 mos · Central Jakarta, Jakarta, Indonesia · Hybrid</p>
+                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
+                  <li>Developed and managed a real-time P2H (daily maintenance) application to monitor the readiness of heavy equipment units.</li>
+                  <li>Built an interactive dashboard system using React and Supabase to connect operational data between drivers and field supervisors.</li>
+                  <li>Optimizing PostgreSQL database queries to ensure latency-free data synchronization under limited network conditions.</li>
+                </ul>
+              </div>
 
-              {/* PENETRATION TESTER */}
-            
-                <CardContent className="p-6 space-y-3 text-justify -translate-y-6">
-                  <h3 className="text-xl font-bold text-white">PENETRATION TESTER</h3>
-                  <p className="text-sm text-gray-400">Juni 2022 - Juni 2024 | Pekerja Lepas</p>
-                  <p className="text-sm text-cyan-400">Intigriti</p>
-                  <ul className="list-disc list-inside text-gray-300 text-sm space-y-1">
-                    <li>Mendeteksi kerentanan dan mempercepat mitigasi risiko keamanan.</li>
-                    <li>Mengembangkan sistem keamanan otomatis untuk monitoring dan threat detection.</li>
-                    <li>Mengurangi dampak finansial dari potensi insiden keamanan.</li>
-                  </ul>
-                </CardContent>
-              
+              {/* Penetration Tester */}
+              <div>
+                <h3 className="text-xl font-bold text-white">Penetration Tester</h3>
+                <p className="text-cyan-400 font-medium">Alibaba Group · Part-time</p>
+                <p className="text-sm text-gray-400">Mar 2026 - Apr 2026 · 2 mos · Area DKI Jakarta · On-site</p>
+                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
+                  <li>Conducting penetration testing (pentest) on web application and API infrastructure within the Alibaba services ecosystem.</li>
+                  <li>Analyzing system resilience against advanced persistent threats (APT) and verifying compliance with international data security standards.</li>
+                  <li>Collaborating with the security operations center (SOC) team to strengthen early intrusion detection systems.</li>
+                </ul>
+              </div>
+
+              {/* Founder */}
+              <div>
+                <h3 className="text-xl font-bold text-white">Founder</h3>
+                <p className="text-cyan-400 font-medium">luxera · Full-time</p>
+                <p className="text-sm text-gray-400">Feb 2026 - Mar 2026 · 2 mos · Indonesia · On-site</p>
+                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
+                  <li>Leading the strategic vision and technical development of the luxera platform, which focuses on digital solutions for SMEs.</li>
+                  <li>Designing a scalable modular system architecture using modern technology stacks (Laravel/React) to support various business verticals.</li>
+                  <li>Managing the product development lifecycle (SDLC), from market research in Tanjungpinang to the launch of the beta version.</li>
+                </ul>
+              </div>
+
+              {/* Cloud Security */}
+              <div>
+                <h3 className="text-xl font-bold text-white">Cloud Security</h3>
+                <p className="text-cyan-400 font-medium">Amazon · Part-time</p>
+                <p className="text-sm text-gray-400">Nov 2025 - Dec 2025 · 2 mos · South Jakarta, Jakarta, Indonesia · Remote</p>
+                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
+                  <li>Conducting regular audits of S3 buckets and network policies to prevent data leaks.</li>
+                  <li>Implement vulnerability scanning automation in the CI/CD pipeline to ensure deployed code has undergone security checks.</li>
+                  <li>Featured project: migration of network security policies that reduced unauthorized access gaps in the production environment by 60%.</li>
+                </ul>
+              </div>
             </div>
 
             {/* Right Timeline */}
             <div className="relative pl-6 border-l-2 border-cyan-500/30 space-y-8">
-              {/* BUG BOUNTY */}
-              
-                <CardContent className="p-6 space-y-3">
-                  <h3 className="text-xl font-bold text-white">BUG BOUNTY</h3>
-                  <p className="text-sm text-gray-400">Juli 2022 - Juli 2024 | Pekerja Lepas</p>
-                  <p className="text-sm text-cyan-400">YesWeHack</p>
-                  <ul className="list-disc list-inside text-gray-300 text-sm space-y-1">
-                    <li>Laporan pengujian penetrasi dengan analisis sistematis dan penilaian risiko.</li>
-                    <li>Kuat dalam keamanan aplikasi web dan pembelajaran teknologi keamanan terbaru.</li>
-                    <li>Berpengalaman dengan Nessus dan Metasploit.</li>
-                  </ul>
-                </CardContent>
-            
+              {/* Security Researcher - Microsoft */}
+              <div>
+                <h3 className="text-xl font-bold text-white">Security Researcher</h3>
+                <p className="text-cyan-400 font-medium">Microsoft · Part-time</p>
+                <p className="text-sm text-gray-400">Jan 2024 - Jan 2025 · 1 yr 1 mo · South Jakarta, Jakarta, Indonesia · Remote</p>
+                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
+                  <li>Contributed to research on cyber threats targeting cloud-based services and the Windows operating system.</li>
+                  <li>Conducted in-depth analysis of logic flaws in third-party API integrations.</li>
+                  <li>Documented research findings to assist Microsoft's internal teams in applying patches before vulnerabilities were publicly exploited.</li>
+                </ul>
+              </div>
+
+              {/* CTF GEMASIK */}
+              <div>
+                <h3 className="text-xl font-bold text-white">CTF GEMASIK</h3>
+                <p className="text-cyan-400 font-medium">Pusat Prestasi Nasional · Seasonal</p>
+                <p className="text-sm text-gray-400">Jul 2024 - Aug 2024 · 2 mos · Remote</p>
+                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
+                  <li>GEMASIK cybersecurity competition provides a competitive arena for students to showcase their skills in handling cyber security incidents through a series of CTF-based challenges.</li>
+                  <li>Participants tested in a capture the flag (CTF) format that requires a deep understanding of cybersecurity concepts and solid technical capabilities.</li>
+                </ul>
+              </div>
+
+              {/* Bug Hunter - Bugcrowd */}
+              <div>
+                <h3 className="text-xl font-bold text-white">Bug Hunter</h3>
+                <p className="text-cyan-400 font-medium">Bugcrowd · Freelance</p>
+                <p className="text-sm text-gray-400">Aug 2023 - Aug 2024 · 1 yr 1 mo</p>
+                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
+                  <li>Awarded a letter of appreciation and inducted into the NASA Hall of Fame for significant contributions to identifying and reporting critical security vulnerabilities in NASA's digital infrastructure.</li>
+                  <li>Conducted in-depth research on NASA's public assets to identify potential security gaps, helping the organization strengthen its cybersecurity defenses against external threats.</li>
+                </ul>
+              </div>
+
+              {/* Bug Bounty - YesWeHack */}
+              <div>
+                <h3 className="text-xl font-bold text-white">Bug Bounty</h3>
+                <p className="text-cyan-400 font-medium">YesWeHack · Freelance</p>
+                <p className="text-sm text-gray-400">Jul 2022 - Jul 2024 · 2 yrs 1 mo · Remote</p>
+                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
+                  <li>Collaborated in developing comprehensive penetration testing reports through systematic collection and analysis of security findings.</li>
+                  <li>Demonstrated strong aptitude in web application security, consistently expanding knowledge through hands-on experience and dedicated learning in cybersecurity domains.</li>
+                </ul>
+              </div>
+
+              {/* Penetration Tester - Intigriti */}
+              <div>
+                <h3 className="text-xl font-bold text-white">Penetration Tester</h3>
+                <p className="text-cyan-400 font-medium">Intigriti · Freelance</p>
+                <p className="text-sm text-gray-400">Jun 2022 - Jun 2024 · 2 yrs 1 mo · Remote</p>
+                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
+                  <li>Proactively identifies and mitigates potential security vulnerabilities prior to exploitation by malicious actors.</li>
+                  <li>Enables rapid vulnerability detection and remediation, minimizing financial impact from potential security incidents.</li>
+                </ul>
+              </div>
 
               {/* VVIP BSSN */}
-              <div className="relative -top-6">
-                <CardContent className="p-6 space-y-3 text-justify">
-                  <h3 className="text-xl font-bold text-white">VVIP PROGRAM - BADAN SIBER DAN SANDI NEGARA</h3>
-                  <p className="text-sm text-gray-400">Mei 2024 - Mei 2024 | Pekerja Lepas</p>
-                  <p className="text-sm text-cyan-400">Voluntary Bug Hunter</p>
-                  <ul className="list-disc list-inside text-gray-300 text-sm space-y-1">
-                    <li>Berkontribusi dalam program strategis BSSN untuk peningkatan keamanan sistem elektronik.</li>
-                    <li>Evaluasi kerentanan web apps menggunakan metode manual dan otomatis.</li>
-                    <li>Menerima sertifikat partisipasi resmi dari BSSN.</li>
-                  </ul>
-                </CardContent>
+              <div>
+                <h3 className="text-xl font-bold text-white">Voluntary Vulnerability Identification And Protection Program</h3>
+                <p className="text-cyan-400 font-medium">Badan Siber dan Sandi Negara · Freelance</p>
+                <p className="text-sm text-gray-400">May 2024 · 1 mo · Tanjung Pinang, Kepulauan Riau, Indonesia · Remote</p>
+                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
+                  <li>I had the opportunity to participate in an exclusive cybersecurity development program organized by the national cyber and crypto agency (BSSN).</li>
+                </ul>
+              </div>
+
+              {/* Telkom Indonesia */}
+              <div>
+                <h3 className="text-xl font-bold text-white">TELEKOMUNIKASI INDONESIA</h3>
+                <p className="text-cyan-400 font-medium">Telkom Indonesia · Apprenticeship</p>
+                <p className="text-sm text-gray-400">Jan 2022 - Jan 2024 · 2 yrs 1 mo · Tanjungpinang, Riau Islands, Indonesia · On-site</p>
+                <ul className="list-disc list-inside text-gray-300 text-sm space-y-1 mt-2">
+                  <li>Play an active role in supporting the technical team's daily operations by assisting with computer-based administrative tasks.</li>
+                  <li>Be responsible for installing, configuring, and maintaining the local area network (LAN) infrastructure between workstations.</li>
+                  <li>Contribute to the network troubleshooting process by diagnosing and providing technical solutions to connectivity issues.</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -1155,8 +1117,8 @@ export default function Portfolio() {
           {[...skillsTop, ...skillsTop, ...skillsTop].map((skill: Skill, index: number) => (
               <div key={`row1-${index}`} className="flex-shrink-0 group cursor-pointer">
                 <div className="flex items-center space-x-4 px-6 py-4 rounded-">
-                  <div className={`flex items-center justify-center w-12 h-12 rounded-full ${skill.color} text-white group-hover:scale-110 transition-transform duration-300`}>
-                    {skill.icon}
+                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 group-hover:scale-110 transition-transform duration-300">
+                    <SkillIcon slug={skill.slug} color={skill.color} name={skill.name} size={28} />
                   </div>
                   <div className="text-left">
                     <h3 className="text-white font-semibold text-lg group-hover:text-cyan-400 transition-colors duration-300">
@@ -1174,8 +1136,8 @@ export default function Portfolio() {
           {[...skillsBottom, ...skillsBottom, ...skillsBottom].reverse().map((skill: Skill, index: number) => (
               <div key={`row2-${index}`} className="flex-shrink-0 group cursor-pointer">
                 <div className="flex items-center space-x-4 px-6 py-4 rounded-full">
-                  <div className={`flex items-center justify-center w-12 h-12 rounded-full ${skill.color} text-white group-hover:scale-110 transition-transform duration-300`}>
-                    {skill.icon}
+                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 group-hover:scale-110 transition-transform duration-300">
+                    <SkillIcon slug={skill.slug} color={skill.color} name={skill.name} size={28} />
                   </div>
                   <div className="text-left">
                     <h3 className="text-white font-semibold text-lg group-hover:text-purple-400 transition-colors duration-300">
@@ -1279,17 +1241,22 @@ export default function Portfolio() {
       <section id="certifications" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Certifications</h2>
+            <h2 className="text-4xl font-bold mb-4 leading-[1.4] bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent inline-block">
+              Certifications
+            </h2>
             <p className="text-gray-300 font-sans">Certificates From Courses, Programs, And Institutions</p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 justify-items-center">
             {certificates.map((cert) => (
               <CertificateCard key={cert.id} cert={cert} />
             ))}
           </div>
         </div>
-        {/* Contact Section */}
-<SectionWrapper id="contact" className="py-20 px-6">
+      </section>
+
+      {/* Contact Section */}
+      <SectionWrapper id="contact" className="py-20 px-6">
   <div className="max-w-4xl mx-auto">
     <div className="text-center mb-16">
       <motion.h2 
@@ -1403,84 +1370,7 @@ export default function Portfolio() {
   </div>
 </SectionWrapper>
 
-         {/* Footer */}
-         <footer className="py-12 px-6">
-       <div className="max-w-6xl mx-auto">
-         <div className="flex flex-col md:flex-row justify-between items-center">
-           <div className="mb-4 md:mb-0">
-             <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-4">
-               Fauzan Aldi 
-             </div>
-             <p className="text-gray-400">Securing The Digital World, One Vulnerability At A Time.</p>
-           </div>
-           <div className="flex space-x-6">
-             <motion.a 
-               href="https://github.com/Fauzan-Aldi" 
-               className="text-gray-400 hover:text-cyan-400 transition-colors"
-               whileHover={{ scale: 1.2, rotate: 360 }}
-               transition={{ duration: 0.3 }}
-             >
-               <Github className="w-6 h-6" />
-             </motion.a>
-             <motion.a 
-               href="https://www.linkedin.com/in/fauzan-aldi/?profileId=ACoAAEouJEIBVUAGgqKuqi8WB1u4bYx4M-4VHFM" 
-               className="text-gray-400 hover:text-cyan-400 transition-colors"
-               whileHover={{ scale: 1.2, rotate: 360 }}
-               transition={{ duration: 0.3 }}
-             >
-               <Linkedin className="w-6 h-6" />
-             </motion.a>
-             <motion.a 
-               href="mailto:fauzanalditester@gmail.com"
-               className="text-gray-400 hover:text-cyan-400 transition-colors"
-               whileHover={{ scale: 1.2, rotate: 360 }}
-               transition={{ duration: 0.3 }}
-             >
-               <Mail className="w-6 h-6" />
-             </motion.a>
-           </div>
-         </div>
-         
-       </div>
-     </footer>
-      {/* Bottom Section */}
-      <div className="">
-            <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-              <div className="text-center md:text-left">
-          
-              
-              </div>
-              
-              
-
-            </div>
-          </div>
-         <div className="mt-8 pt-8 border-t border-gray-800 text-center">
-  <p className="text-gray-400">
-    © 2024 Fauzan Aldi – Security Researcher. Built with React, TypeScript & Tailwind CSS.
-  </p>
-  <p className="text-gray-500 text-xs mt-1">
-    Built with React, TypeScript & Tailwind CSS
-  </p>
-  <div className="flex justify-center space-x-6 mt-2">
-    <motion.div
-      className="flex items-center space-x-2 text-gray-500 text-xs"
-      whileHover={{ scale: 1.05 }}
-    >
-      <Shield className="w-4 h-4" />
-      <span>Secure by Design</span>
-    </motion.div>
-    <motion.div
-      className="flex items-center space-x-2 text-gray-500 text-xs"
-      whileHover={{ scale: 1.05 }}
-    >
-      <Code className="w-4 h-4" />
-      <span>Open Source</span>
-    </motion.div>
-  </div>
-</div>
-      </section>
     </div>
   );
-} 
+}
    
